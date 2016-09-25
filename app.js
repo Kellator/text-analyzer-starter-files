@@ -34,12 +34,12 @@ function removeReturns(text) {
 //var textReport then calls those variables into place in the results section of the page
 function getTextStatistics(text) {
 	var tokens = tokenize(text);
-	var totalWordCount = getWordCount(tokens);
 	var uniqueWordCount = countUniqueWords(tokens);
+	var totalWordCount = getWordCount(tokens);
 	var avgWordLength = getAvgWordLength(tokens);
 	var avgSentenceLength = getWordsPerSentence(text);
 
-	var textReport = $('.js-text-report');
+	var textReport = $('.js-text-report')
 	textReport.find('.js-word-count').text(totalWordCount);
 	textReport.find('.js-unique-count').text(uniqueWordCount);
 	textReport.find('.js-word-length').text(avgWordLength + ' characters');

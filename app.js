@@ -2,27 +2,27 @@
 //of sentences to get average words per sentence returns number to two decimal points
 function getWordsPerSentence(text) {
 	var numOfSentences = text.split(/[!.?]+/).filter(Boolean).length;;
-	var wordCount = removePunctuation(text).length;
+	var wordCount = tokenize(text).length;
 	return (wordCount / numOfSentences).toFixed(2);
 }
 //gets average length of each word to two decimal points
-function getAvgWordLength(simpleText) {
-	var totalLength = simpleText.join("").length;
-	return (totalLength / simpleText.length).toFixed(2);
+function getAvgWordLength(tokens) {
+	var totalLength = tokens.join("").length;
+	return (totalLength / tokens.length).toFixed(2);
 }
 
 //counts total number of words
-function getWordCount(simpleText) {
-	return simpleText.length;
+function getWordCount(tokens) {
+	return tokens.length;
 }
 
-function countUniqueWords(simpleText) {
-	var uniqueWords = new Set(simpleText);
+function countUniqueWords(tokens) {
+	var uniqueWords = new Set(tokens);
 	return uniqueWords.size;
 }
 
 //takes user input string, removes all punctuation, and returns sorted list
-function removePunctuation(text) {
+function tokenize(text) {
 	return text.toLowerCase().split(/{,!.":;-}+/).filter(Boolean).sort();
 }
 
@@ -33,17 +33,17 @@ function removeReturns(text) {
 //getTextStatistics sets variables values to the working functions of the problem.
 //var textReport then calls those variables into place in the results section of the page
 function getTextStatistics(text) {
-	var simpleText = removePunctuation(text);
-	var totalWordCount = getWordCount(simpleText);
-	var uniqueWordCount = countUniqueWords(simpleText)
-	var avgWordLength = getAvgWordLength(simpleText);
+	var tokens = tokenize(text);
+	var totalWordCount = getWordCount(tokens);
+	var uniqueWordCount = countUniqueWords(tokens);
+	var avgWordLength = getAvgWordLength(tokens);
 	var avgSentenceLength = getWordsPerSentence(text);
 
-	var textReport = $('.js-text-report')
+	var textReport = $('.js-text-report');
 	textReport.find('.js-word-count').text(totalWordCount);
 	textReport.find('.js-unique-count').text(uniqueWordCount);
-	textReport.find('.js-word-length').text(avgWordLength + 'characters');
-	textReport.find('.js-sentence-length').text(avgSentenceLength + 'words');
+	textReport.find('.js-word-length').text(avgWordLength + ' characters');
+	textReport.find('.js-sentence-length').text(avgSentenceLength + ' words');
 	textReport.removeClass('hidden');
 }
 
@@ -55,6 +55,6 @@ function textSubmissionHandler() {
 		getTextStatistics(removeReturns(userText));
 	});
 }
-$(function()){
+$(function() {
 	textSubmissionHandler();
 });

@@ -1,10 +1,11 @@
-//splits array by end punctuation the divides total word count by number of sentences to get average words per sentence
+//splits array by end punctuation the divides total word count by number 
+//of sentences to get average words per sentence returns number to two decimal points
 function getWordsPerSentence(text) {
 	var numOfSentences = text.split(/[!.?]+/).filter(Boolean).length;;
 	var wordCount = removePunctuation(text).length;
 	return (wordCount / numOfSentences).toFixed(2);
 }
-//gets average length of each word
+//gets average length of each word to two decimal points
 function getAvgWordLength(simpleText) {
 	var totalLength = simpleText.join("").length;
 	return (totalLength / simpleText.length).toFixed(2);
@@ -39,20 +40,20 @@ function getTextStatistics(text) {
 	var avgSentenceLength = getWordsPerSentence(text);
 
 	var textReport = $('.js-text-report')
-	textReport.find(".js-word-count").text(totalWordCount);
-	textReport.find(".js-unique-count").text(uniqueWordCount);
-	textReport.find(".js-word-length").text(avgWordLength);
-	textReport.find(".js-sentence-length").text(avgSentenceLength);
-	textReport.removeClass("hidden");
+	textReport.find('.js-word-count').text(totalWordCount);
+	textReport.find('.js-unique-count').text(uniqueWordCount);
+	textReport.find('.js-word-length').text(avgWordLength + 'characters');
+	textReport.find('.js-sentence-length').text(avgSentenceLength + 'words');
+	textReport.removeClass('hidden');
 }
 
 //takes user input
 function textSubmissionHandler() {
-	$(".js-text-form").submit(function(event){
-	event.preventDefault();
-	var userInputText = $(this).find("#user-text").val();
-	getTextStatistics(removeReturns(userInputText));
-});
+	$('.js-text-form').submit(function(event) {
+		event.preventDefault();
+		var userText = $(this).find('#user-text').val();
+		getTextStatistics(removeReturns(userText));
+	});
 }
 $(function()){
 	textSubmissionHandler();

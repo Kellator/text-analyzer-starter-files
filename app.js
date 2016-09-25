@@ -23,7 +23,7 @@ function countUniqueWords(tokens) {
 
 //takes user input string, removes all punctuation, and returns sorted list
 function tokenize(text) {
-	return text.toLowerCase().split(/{,!.":;-}+/).filter(Boolean).sort();
+	return text.toLowerCase().split(/[,!.":;-]+/).filter(Boolean).sort();
 }
 
 function removeReturns(text) {
